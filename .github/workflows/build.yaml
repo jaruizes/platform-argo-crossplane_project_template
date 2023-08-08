@@ -52,7 +52,7 @@ jobs:
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
       contents: write
-      
+
     steps:
       - uses: actions/checkout@v3
       - name: Get current date
@@ -73,7 +73,7 @@ jobs:
         id: updbuilddate
         uses: mikefarah/yq@master
         with:
-          cmd: yq eval '.spec.template.metadata.annotations.buildate = "${{ steps.date.outputs.date }}"' -i gitops/manifests/deployment.yaml
+          cmd: yq eval '.spec.template.metadata.annotations.buildate = "\"${{ steps.date.outputs.date }}\""' -i gitops/manifests/deployment.yaml
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
