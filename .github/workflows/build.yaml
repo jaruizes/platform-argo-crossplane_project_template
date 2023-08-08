@@ -57,13 +57,13 @@ jobs:
         uses: pr-mpt/actions-commit-hash@v2
 
       - name: Update revision
-        id: imgupd
+        id: updrevision
         uses: mikefarah/yq@master
         with:
           cmd: yq eval '.spec.template.metadata.annotations.revision = "${{ steps.commit.outputs.short }}"' -i gitops/manifests/deployment.yaml
 
       - name: Update build date
-        id: imgupd
+        id: updbuilddate
         uses: mikefarah/yq@master
         with:
           cmd: yq eval '.spec.template.metadata.annotations.buildate = "${{ steps.date.outputs.date }}"' -i gitops/manifests/deployment.yaml
