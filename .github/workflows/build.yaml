@@ -1,7 +1,10 @@
 name: Java CI
 
-on: [push]
-
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+      - 'gitops/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,6 +20,10 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots clean package
 
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
