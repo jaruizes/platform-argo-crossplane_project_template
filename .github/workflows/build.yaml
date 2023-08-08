@@ -39,7 +39,35 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: product-test
-          IMAGE_TAG: 1.0
+          IMAGE_TAG: "1.0"
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+  update-manifest:
+    runs-on: ubuntu-latest
+    steps:
+#      - uses: actions/checkout@v2
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
+
+      - name: Get commit
+        id: commit
+        uses: pr-mpt/actions-commit-hash@v2
+
+      - name: Update revision
+        id: imgupd
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq eval '.spec.template.metadata.annotations.revision = "${{ steps.commit.outputs.short }}"' -i gitops/manifests/deployment.yaml
+
+      - name: Update build date
+        id: imgupd
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq eval '.spec.template.metadata.annotations.buildate = "${{ steps.date.outputs.date }}"' -i gitops/manifests/deployment.yaml
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update labels

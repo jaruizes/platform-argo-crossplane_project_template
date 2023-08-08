@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products
+spec:
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+      annotations:
+        revision: "not modify"
+        buildDate: "not modify"
+    spec:
+      containers:
+        - name: products
+          image: host.k3d.internal:5000/products:latest
+          ports:
+            - containerPort: 8080
+              name: 8080-tcp
