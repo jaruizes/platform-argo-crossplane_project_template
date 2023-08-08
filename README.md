@@ -1,0 +1,1 @@
+# platform-argo-crossplane_project_template
