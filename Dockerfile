@@ -1,5 +1,5 @@
-ARG BUILD_IMAGE=maven:3-openjdk-11-slim
-ARG RUNTIME_IMAGE=adoptopenjdk/openjdk11:jre-11.0.9.1_1-alpine
+ARG BUILD_IMAGE=maven:3-openjdk-17-slim
+ARG RUNTIME_IMAGE=eclipse-temurin:17-alpine
 
 FROM ${BUILD_IMAGE} AS MAVEN_TOOL_CHAIN
 COPY pom.xml /tmp/
