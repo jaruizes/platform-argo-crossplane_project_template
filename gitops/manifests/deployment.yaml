@@ -11,8 +11,8 @@ spec:
       labels:
         app: products
       annotations:
-        revision: "0754552"
-        buildate: "2023-08-08T22:41:11"
+        revision: "366f513"
+        buildate: "2023-08-08T22:55:19"
     spec:
       containers:
         - name: products
