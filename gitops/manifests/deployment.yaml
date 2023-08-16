@@ -18,8 +18,8 @@ spec:
         - name: products
           image: <IMAGE>
           ports:
-            - containerPort: 8080
-              name: 8080-tcp
+            - containerPort: 9084
+              name: 9084-tcp
           envFrom:
             - secretRef:
                 name: app-secret
