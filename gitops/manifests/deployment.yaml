@@ -16,7 +16,10 @@ spec:
     spec:
       containers:
         - name: products
-          image: host.k3d.internal:5000/products:latest
+          image: <IMAGE>
           ports:
             - containerPort: 8080
               name: 8080-tcp
+          envFrom:
+            - secretRef:
+                name: app-secret
