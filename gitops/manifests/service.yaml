@@ -8,4 +8,4 @@ spec:
     app: products
   ports:
     - port: 9091
-      targetPort: 8080-tcp
+      targetPort: 9084-tcp
